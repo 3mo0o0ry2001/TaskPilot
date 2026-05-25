@@ -1,0 +1,264 @@
+[
+  {
+    "id": "TC001",
+    "category": "task_management",
+    "input": "List all my pending tasks",
+    "expected_tools": [
+      "list_tasks"
+    ],
+    "tools_used": [
+      "list_tasks"
+    ],
+    "tools_match": true,
+    "response": "You have **12 pending tasks**. Here's the list:\n\n1. **Review quarterly report**  \n   Due: May 28, 2026 | Created: May 21  \n2. **Prepare presentation slides**  \n   Due: May 22, 2026 | Created: May 21  \n3. **Prepare the Q3 report**  \n   No due date | Created: May 23  \n4. **Review the budget**  \n   Due: May 30, 2026 | Created: May 23  \n5. **Prepare the Q3 report**  \n   No due date | Created: May 23  \n6. **Follow up with Sara about Friday availability**  \n   Due: Sept 22, 2023 (overdue!) | Created: May 23  \n7. **Follow up with Sara about Friday availability**  \n   Due: May 30, 2026 | Created: May 23  \n8. **Prepare the Q3 report**  \n   No due date | Created: May 23  \n9. **Review the budget**  \n   Due: May 30, 2026 | Created: May 23  \n10. **Follow up with Fatima**  \n    Due: Oct 17, 2023 (overdue!) | Created: May 23  \n11. **Prepare the Q3 report**  \n    No due date | Created: May 24  \n12. **Follow up with Fatima**  \n    Due: May 31, 2026 | Created: May 24  \n\nTasks 6 and 10 are critically overdue.",
+    "expected_behavior": "lists tasks without extra commentary",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC002",
+    "category": "chained_tools",
+    "input": "Send Ahmed an email saying the meeting is cancelled",
+    "expected_tools": [
+      "find_contact",
+      "send_email"
+    ],
+    "tools_used": [
+      "find_contact",
+      "send_email"
+    ],
+    "tools_match": true,
+    "response": "I’ve sent the meeting cancellation email to Ahmed Hassan.",
+    "expected_behavior": "calls find_contact first, then send_email",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC003",
+    "category": "error_handling",
+    "input": "Send John an email about the project",
+    "expected_tools": [
+      "find_contact"
+    ],
+    "tools_used": [
+      "find_contact"
+    ],
+    "tools_match": true,
+    "response": "I couldn't find John in your contacts. Please provide his email address.",
+    "expected_behavior": "contact not found, asks for email, does NOT send",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC004",
+    "category": "relative_date",
+    "input": "Add a reminder tomorrow at 5 PM for the team sync",
+    "expected_tools": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_match": true,
+    "response": "I created the team sync reminder for tomorrow at 5:00 PM.",
+    "expected_behavior": "gets date first, creates event with correct ISO date",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC005",
+    "category": "relative_date",
+    "input": "Add a reminder next Monday at 9 AM for the weekly review",
+    "expected_tools": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_match": true,
+    "response": "I created your \"Weekly Review Reminder\" event for Monday, May 26, 2026 at 9:00 AM.",
+    "expected_behavior": "calculates next Monday correctly",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC006",
+    "category": "task_management",
+    "input": "Create a task to prepare the Q3 report",
+    "expected_tools": [
+      "create_task"
+    ],
+    "tools_used": [
+      "create_task"
+    ],
+    "tools_match": true,
+    "response": "I've created the task \"Prepare Q3 report\" (ID: 13). Let me know if you'd like to set a due date or add details.",
+    "expected_behavior": "creates task, short confirmation only",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC007",
+    "category": "chained_tools",
+    "input": "Send Sara an email asking if she's available Friday",
+    "expected_tools": [
+      "find_contact",
+      "send_email"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "find_contact",
+      "send_email"
+    ],
+    "tools_match": true,
+    "response": "I've sent the email to Sara asking about her availability on Friday.",
+    "expected_behavior": "finds Sara, sends email",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC008",
+    "category": "task_management",
+    "input": "What tasks do I have?",
+    "expected_tools": [
+      "list_tasks"
+    ],
+    "tools_used": [
+      "list_tasks"
+    ],
+    "tools_match": true,
+    "response": "You have a total of **13 pending tasks**. Here's an overview:\n\n**Tasks with deadlines**:\n1. Prepare presentation slides (Due: May 22, 2026)\n2. Review quarterly report (Due: May 28, 2026)\n3. Review the budget (Due: May 30, 2026)\n4. Follow up with Sara about Friday availability (Due: May 30, 2026)\n5. Review the budget (Due: May 30, 2026)\n6. Follow up with Fatima (Due: May 31, 2026)\n\n**Overdue tasks**:\n- Follow up with Sara (Due: September 22, 2023)\n- Follow up with Fatima (Due: October 17, 2023)\n\n**Tasks without deadlines**:\n- Prepare the Q3 report (4 instances)\n- Prepare Q3 report (1 instance)\n\nWould you like to refine this list or focus on specific tasks?",
+    "expected_behavior": "lists all tasks",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC009",
+    "category": "direct_email",
+    "input": "Send an email to ahmed.hassan@example.com about the deadline",
+    "expected_tools": [
+      "send_email"
+    ],
+    "tools_used": [
+      "send_email"
+    ],
+    "tools_match": true,
+    "response": "The email about the deadline has been sent to Ahmed Hassan.",
+    "expected_behavior": "sends directly without find_contact since email is provided",
+    "pass": true,
+    "error": null,
+    "retried": true
+  },
+  {
+    "id": "TC010",
+    "category": "relative_date",
+    "input": "Create a task to review the budget with due date next week",
+    "expected_tools": [
+      "get_current_datetime",
+      "create_task"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "create_task"
+    ],
+    "tools_match": true,
+    "response": "I created the task \"Review the budget\" with a due date of 2026-06-01 22:24.",
+    "expected_behavior": "gets date, creates task with correct due date",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC011",
+    "category": "chained_tools",
+    "input": "Send Omar an email saying the report is ready",
+    "expected_tools": [
+      "find_contact",
+      "send_email"
+    ],
+    "tools_used": [
+      "find_contact",
+      "send_email"
+    ],
+    "tools_match": true,
+    "response": "I've sent the email to Omar Khaled at omar.k@example.com with the subject \"Report Ready\".",
+    "expected_behavior": "finds Omar, sends email",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC012",
+    "category": "relative_date",
+    "input": "Add meeting with the dev team today at 2 PM",
+    "expected_tools": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "create_event"
+    ],
+    "tools_match": true,
+    "response": "I've scheduled your meeting with the dev team for today at 2:00 PM.",
+    "expected_behavior": "gets today's date, creates event at 14:00",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC013",
+    "category": "error_handling",
+    "input": "Send Mike an email about the project update",
+    "expected_tools": [
+      "find_contact"
+    ],
+    "tools_used": [
+      "find_contact"
+    ],
+    "tools_match": true,
+    "response": "I couldn't find Mike in your contacts. Please provide his email address.",
+    "expected_behavior": "contact not found, asks for email only",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC014",
+    "category": "task_management",
+    "input": "List my completed tasks",
+    "expected_tools": [
+      "list_tasks"
+    ],
+    "tools_used": [
+      "list_tasks"
+    ],
+    "tools_match": true,
+    "response": "You have no completed tasks.",
+    "expected_behavior": "lists completed tasks only",
+    "pass": true,
+    "error": null
+  },
+  {
+    "id": "TC015",
+    "category": "multi_action",
+    "input": "Send Fatima an email and also create a task to follow up with her next week",
+    "expected_tools": [
+      "find_contact",
+      "send_email",
+      "get_current_datetime",
+      "create_task"
+    ],
+    "tools_used": [
+      "get_current_datetime",
+      "find_contact",
+      "send_email",
+      "create_task"
+    ],
+    "tools_match": true,
+    "response": "I've sent the email to Fatima and created a follow-up task due on May 31, 2026.",
+    "expected_behavior": "handles both actions in one turn",
+    "pass": true,
+    "error": null
+  }
+]

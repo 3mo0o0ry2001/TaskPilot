@@ -1,0 +1,107 @@
+[
+  {
+    "id": "TC001",
+    "input": "List all my pending tasks",
+    "expected_tools": ["list_tasks"],
+    "expected_behavior": "lists tasks without extra commentary",
+    "category": "task_management"
+  },
+  {
+    "id": "TC002",
+    "input": "Send Ahmed an email saying the meeting is cancelled",
+    "expected_tools": ["find_contact", "send_email"],
+    "expected_behavior": "calls find_contact first, then send_email",
+    "category": "chained_tools"
+  },
+  {
+    "id": "TC003",
+    "input": "Send John an email about the project",
+    "expected_tools": ["find_contact"],
+    "expected_behavior": "contact not found, asks for email, does NOT send",
+    "category": "error_handling"
+  },
+  {
+    "id": "TC004",
+    "input": "Add a reminder tomorrow at 5 PM for the team sync",
+    "expected_tools": ["get_current_datetime", "create_event"],
+    "expected_behavior": "gets date first, creates event with correct ISO date",
+    "category": "relative_date"
+  },
+  {
+    "id": "TC005",
+    "input": "Add a reminder next Monday at 9 AM for the weekly review",
+    "expected_tools": ["get_current_datetime", "create_event"],
+    "expected_behavior": "calculates next Monday correctly",
+    "category": "relative_date"
+  },
+  {
+    "id": "TC006",
+    "input": "Create a task to prepare the Q3 report",
+    "expected_tools": ["create_task"],
+    "expected_behavior": "creates task, short confirmation only",
+    "category": "task_management"
+  },
+  {
+    "id": "TC007",
+    "input": "Send Sara an email asking if she's available Friday",
+    "expected_tools": ["find_contact", "send_email"],
+    "expected_behavior": "finds Sara, sends email",
+    "category": "chained_tools"
+  },
+  {
+    "id": "TC008",
+    "input": "What tasks do I have?",
+    "expected_tools": ["list_tasks"],
+    "expected_behavior": "lists all tasks",
+    "category": "task_management"
+  },
+  {
+    "id": "TC009",
+    "input": "Send an email to ahmed.hassan@example.com about the deadline",
+    "expected_tools": ["send_email"],
+    "expected_behavior": "sends directly without find_contact since email is provided",
+    "category": "direct_email"
+  },
+  {
+    "id": "TC010",
+    "input": "Create a task to review the budget with due date next week",
+    "expected_tools": ["get_current_datetime", "create_task"],
+    "expected_behavior": "gets date, creates task with correct due date",
+    "category": "relative_date"
+  },
+  {
+    "id": "TC011",
+    "input": "Send Omar an email saying the report is ready",
+    "expected_tools": ["find_contact", "send_email"],
+    "expected_behavior": "finds Omar, sends email",
+    "category": "chained_tools"
+  },
+  {
+    "id": "TC012",
+    "input": "Add meeting with the dev team today at 2 PM",
+    "expected_tools": ["get_current_datetime", "create_event"],
+    "expected_behavior": "gets today's date, creates event at 14:00",
+    "category": "relative_date"
+  },
+  {
+    "id": "TC013",
+    "input": "Send Mike an email about the project update",
+    "expected_tools": ["find_contact"],
+    "expected_behavior": "contact not found, asks for email only",
+    "category": "error_handling"
+  },
+  {
+    "id": "TC014",
+    "input": "List my completed tasks",
+    "expected_tools": ["list_tasks"],
+    "expected_behavior": "lists completed tasks only",
+    "category": "task_management"
+  },
+  {
+    "id": "TC015",
+    "input": "Send Fatima an email and also create a task to follow up with her next week",
+    "expected_tools": ["find_contact", "send_email", "get_current_datetime", "create_task"],
+    "expected_behavior": "handles both actions in one turn",
+    "category": "multi_action"
+  }
+]
