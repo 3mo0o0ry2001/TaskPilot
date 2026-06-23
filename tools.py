@@ -56,9 +56,9 @@ TOOLS = [
                 "type": "object",
                 "properties": {
                     "status": {
-                        "type": "string",
-                        "enum": ["pending", "completed"],
-                        "description": "Filter tasks by status. Omit to get all tasks."
+                        "type": ["string", "null"],
+                        "enum": ["pending", "completed", None],
+                        "description": "Filter tasks by status. Use null or omit entirely to get ALL tasks. Never pass an empty object."
                     }
                 }
             }

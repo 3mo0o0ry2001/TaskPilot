@@ -1,0 +1,9 @@
+groq
+streamlit
+python-dotenv
+rich
+pydantic
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client

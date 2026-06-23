@@ -123,36 +123,74 @@ taskpilot/
 
 ## Setup
 
-**1. Clone and install:**
+**1. Clone the repo:**
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/taskpilot.git
 cd taskpilot
+```
+
+**2. Create a virtual environment inside the project folder:**
+
+```bash
+# macOS / Linux
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\Activate.ps1
+source venv/bin/activate
+
+# Windows (PowerShell)
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+> **Important (Windows):** Create the `venv` folder *inside* the cloned repo — not somewhere else and not moved later. The venv stores absolute paths internally and will break if the folder is relocated.
+
+**3. Install dependencies:**
+
+```bash
 pip install -r requirements.txt
 ```
 
-**2. Environment:**
+**4. Set your API key:**
 
 ```bash
+# macOS / Linux
 cp .env.example .env
-# Add your GROQ_API_KEY from console.groq.com
+
+# Windows (PowerShell)
+Copy-Item .env.example .env
 ```
 
-**3. Google APIs (optional — works without them using mock fallback):**
+Open `.env` and add your Groq API key (free at [console.groq.com](https://console.groq.com)):
 
-- Create a project in [Google Cloud Console](https://console.cloud.google.com)
-- Enable Gmail API and Google Calendar API
-- Create OAuth 2.0 Desktop credentials
-- Download as `credentials.json` and place in project root
-- Run: `python -c "from google_auth import get_credentials; get_credentials()"`
+```
+GROQ_API_KEY=your_key_here
+```
 
-**4. Run:**
+**5. Run:**
 
 ```bash
 streamlit run app.py
 ```
+
+The app opens at `http://localhost:8501`. It works immediately with a mock fallback for Gmail and Calendar — no Google setup needed to try it out.
+
+---
+
+## Google APIs (optional)
+
+Without this step, emails and calendar events are saved locally (mock mode). To connect real Gmail and Google Calendar:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com) and create a project
+2. Enable **Gmail API** and **Google Calendar API**
+3. Create **OAuth 2.0 Desktop** credentials and download as `credentials.json`
+4. Place `credentials.json` in the project root
+5. Run the auth flow once:
+
+```bash
+python -c "from google_auth import get_credentials; get_credentials()"
+```
+
+A `token.json` file will be created. After that, emails and events go through the real APIs.
 
 ---
 
@@ -162,22 +200,6 @@ streamlit run app.py
 cd evals
 python run_evals.py
 python error_analysis.py
-```
-
----
-
-## Requirements
-
-```
-groq
-streamlit
-python-dotenv
-rich
-pydantic
-google-auth
-google-auth-oauthlib
-google-auth-httplib2
-google-api-python-client
 ```
 
 ---

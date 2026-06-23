@@ -55,6 +55,12 @@ def create_task(title: str, due_date: str = None) -> dict:
 
 
 def list_tasks(status: str = None) -> dict:
+    # Models sometimes pass an empty object/dict or empty string instead of
+    # omitting the optional arg. Treat anything that isn't a valid status string
+    # as "no filter" (list all tasks).
+    if not isinstance(status, str) or status not in ("pending", "completed"):
+        status = None
+
     conn = get_connection()
     cur = conn.cursor()
     if status:
