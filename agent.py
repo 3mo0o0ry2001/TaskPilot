@@ -10,7 +10,7 @@ from db import init_db
 
 load_dotenv()
 
-MODEL = "qwen/qwen3-32b"
+MODEL = "openai/gpt-oss-120b"
 MAX_ITERATIONS = 10
 
 SYSTEM_PROMPT = """You are TaskPilot, a personal productivity assistant.

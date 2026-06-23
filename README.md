@@ -1,8 +1,8 @@
 # TaskPilot
 
-A personal productivity agent built from scratch using Python, Groq (Qwen3-32B), Gmail API, and Google Calendar API. No LangChain, no LangGraph. Just a raw agentic loop with tool use, hallucination detection, and eval-driven development.
+A personal productivity agent built from scratch using Python, Groq (gpt-oss-120b), Gmail API, and Google Calendar API. No LangChain, no LangGraph. Just a raw agentic loop with tool use, hallucination detection, and eval-driven development.
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Groq](https://img.shields.io/badge/LLM-Qwen3--32B-orange) ![Streamlit](https://img.shields.io/badge/UI-Streamlit-red) ![Gmail](https://img.shields.io/badge/Gmail-API-green) ![Calendar](https://img.shields.io/badge/Google_Calendar-API-blue)
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![Groq](https://img.shields.io/badge/LLM-gpt--oss--120b-orange) ![Streamlit](https://img.shields.io/badge/UI-Streamlit-red) ![Gmail](https://img.shields.io/badge/Gmail-API-green) ![Calendar](https://img.shields.io/badge/Google_Calendar-API-blue)
 
 ---
 
@@ -42,7 +42,7 @@ User Input
     ↓
 Intent Detection (tool_choice: required / auto)
     ↓
-LLM (Qwen3-32B via Groq)
+LLM (gpt-oss-120b via Groq)
     ↓
 Tool Call → Tool Handler → Tool Result
     ↓
